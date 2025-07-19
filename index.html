@@ -1,0 +1,369 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            background-image: url(img/22.png);
+            background-size: cover;
+            /* background-image: conic-gradient(from 0deg, #050859, #164e05, #52022a);
+                height: 100vh;
+                 width: 100%; */
+
+        }
+
+        .pop {
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.092);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 1s;
+
+            >.box {
+                width: 750px;
+                height: 600px;
+                background-color: rgb(235, 90, 90);
+
+                >img {
+                    width: 750px;
+                    height: 600px;
+                }
+
+
+            }
+        }
+
+        .todolist {
+            width: 600px;
+            margin: 100px auto;
+            background-color: rgba(13, 6, 200, 0.799);
+            /* background-image: url(../todolist/Todoist-To-Do-List-Task-List-Logo-1.png); */
+            border-radius: 20px;
+            padding: 10px;
+
+            >* {
+                width: 100%;
+                padding: 1%;
+                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+            }
+
+            >h2 {
+                display: flex;
+                justify-content: center;
+                font-style: italic;
+                color: red;
+            }
+
+            >div {
+                display: flex;
+                display: flex;
+                justify-content: space-evenly;
+
+                >input {
+                    width: 80%;
+                    height: 40px;
+                    border-radius: 10px;
+
+                }
+
+                >button {
+                    width: 10%;
+                    height: 40px;
+                    background-color: brown;
+                    font-size: 20px;
+                    cursor: pointer;
+                    border-radius: 10px;
+
+                    >i {
+                        font-size: 30px;
+                        color: azure;
+
+                    }
+
+                }
+
+            }
+
+            >ul {
+                >li {
+                    width: 100%;
+                    height: 65px;
+                    margin: 10px 0;
+                    list-style-type: none;
+                    border-radius: 10px;
+                    background-color: rgba(25, 193, 10, 0.673);
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    position: relative;
+                    cursor: pointer;
+                    transition: 1s;
+
+                    >* {
+                        display: block;
+                    }
+
+                    >.line {
+                        width: 0;
+                        height: 4px;
+                        border-radius: 3px;
+                        display: flex;
+                        background-color: black;
+                        position: absolute;
+                        left: 0;
+                        top: 34px;
+                        transition: 1s;
+
+                    }
+
+                    >h3 {
+                        width: 400px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        padding-left: 10px;
+                        text-transform: capitalize;
+                        /* border: solid 1px black; */
+                    }
+
+                    >.edit {
+                        width: 300px;
+                        height: 40px;
+                        border-radius: 10px;
+                        background-color: gold;
+                        font-size: 15px;
+                        font-style: inherit;
+
+                    }
+
+                    >span {
+                        width: 50px;
+                        height: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 20px;
+                        /* background-color: #038621; */
+                        background-color: red;
+                        margin: 0 5px;
+
+                        >i {
+                            font-size: 20px;
+                            color: rgb(5, 4, 4);
+
+                        }
+
+                        >.pencil {
+                            color: rgb(14, 0, 3);
+
+
+                        }
+
+                        >.x {
+                            color: rgb(11, 0, 3);
+
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+        }
+
+        .left {
+            transform: translateX(-1500px);
+        }
+
+        #garbage {
+            width: 230px;
+            background-image: url(img/20.png);
+            background-size: cover;
+            /* background-position: center; */
+            /* background-color: rgb(232, 170, 77); */
+            border-radius: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            margin: 10px;
+
+            >li {
+                height: 60px;
+                padding: 10px;
+                color: rgb(3, 0, 0);
+                /* border: 1px solid rgb(2, 2, 2); */
+                list-style-type: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-family: Arial;
+
+                >span {
+                    cursor: pointer;
+                    font-size: 30px;
+                    color: rgb(202, 2, 2);
+                }
+
+            }
+        }
+
+        .hide {
+
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pop">
+        <div class="box">
+            <img src="img/21.png" alt="">
+        </div>
+    </div>
+    <div class="todolist">
+        <h2>My ToDoList</h2>
+        <div class="todo">
+            <input autofocus type="text" placeholder="Write Text...">
+            <button><i class="bi bi-download"></i></button>
+        </div>
+        <ul id="list"></ul>
+    </div>
+    <ul id="garbage"></ul>
+</body>
+<script>
+    const inp = document.querySelector('.todolist>.todo>input')
+    const btn = document.querySelector('.todolist>.todo>button')
+    const list = document.querySelector('#list')
+    const deletedlist = document.getElementById('garbage')
+    const pop = document.querySelector('.pop')
+    const box = document.querySelector('.box')
+
+    pop.addEventListener('click', (e) => {
+        pop.style.left = '-100%'
+    })
+    box.addEventListener('click', (e) => {
+        e.stopPropagation()
+    })
+
+    //let inpcheck = []
+    btn.addEventListener('click', () => {
+        let temp = inp.value
+        if (temp === '') {
+            alert('لطفا فیلد را پر کنید...');
+
+        } else {
+            // console.log(temp);
+            // inpcheck = document.querySelectorAll('ul>li>span>input[type=checkbox]')
+            // console.log(inpcheck)
+            // inpcheck.forEach((val)=>{
+            //     val.addEventListener('click', ()=>{
+            //         let x = val.parentElement.previousElementSibling.innerText
+            //         console.log(x)
+            //     })
+            // })
+            myAdd(temp)
+        }
+    })
+
+    function myAdd(temp) {
+        let li = document.createElement('li')
+        li.innerHTML = `
+                <span class=line></span>
+                <h3>${temp}</h3>
+                <input class='hide edit' type='text' />
+                <span onclick= myEdit(this)><i  class="bi bi-pencil-square pencil"></i></span>
+                <span onclick= myDel(this)><i class="bi bi-trash3 x"></i></i></span>
+                `
+        list.appendChild(li)
+        inp.value = null
+        inp.focus()
+
+    }
+    // function fnDel(s){
+    //                 console.log(s);
+
+    //             let temp = s.parentElement.previousElementSibling.innerText
+    //             if(s.checked){
+
+    //                 s.parentElement.previousElementSibling.innerHTML= '<del>'+ temp +'</del>'
+    //             }else{
+    //                   s.parentElement.previousElementSibling.innerHTML= temp
+    //             }
+
+    //             }
+    let num = 1
+    function myEdit(s) {
+        if (num % 2) {
+            s.parentElement.children[2].classList.remove('hide')
+            s.parentElement.children[2].value = s.parentElement.children[1].innerText
+            s.innerHTML = '<i class="bi bi-pencil-fill"></i>'
+        } else {
+            confirm('آیا از تغیر آیتم مطمن هستید؟')
+            s.parentElement.children[2].classList.add('hide')
+            s.parentElement.children[1].innerText = s.parentElement.children[2].value
+            s.innerHTML = '<i  class="bi bi-pencil-square pencil"></i>'
+
+        }
+        num++;
+    }
+
+
+    // function fnDel(s) {
+
+    //     if (s.checked) {
+    //         s.parentElement.previousElementSibling.previousElementSibling.style.width = '500px'
+    //     } else {
+    //         s.parentElement.previousElementSibling.previousElementSibling.style.width = '0'
+    //     }
+
+    // }
+
+
+    function myDel(s) {
+        if (confirm('آیتم به سطل زباله منتقل می شود...')) {
+            let oldText = s.parentElement.children[1].innerText
+            s.parentElement.classList.add('left')
+            setTimeout(() => {
+                s.parentElement.remove()
+            }, 750);
+
+            let li = document.createElement('li')
+            li.innerHTML = `
+            <b>${oldText}</b>
+            <span onclick='addAgaine(this)'><i class="bi bi-arrow-clockwise"></i></span>
+            `
+            deletedlist.appendChild(li)
+        }
+    }
+
+    function addAgaine(s) {
+        if (confirm('آیا از بازگشت آیتم مطمن هستید؟')) {
+            let temp = s.previousElementSibling.innerText
+            s.parentElement.remove()
+            myAdd(temp)
+        }
+    }
+
+
+
+</script>
+
+</html>
